@@ -28,6 +28,8 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'Valloric/YouCompleteMe'
 
+Plugin 'vimwiki/vimwiki'
+
 filetype plugin indent on "Reenable filetype controls
 
 " === GENERAL SETTINGS ===
