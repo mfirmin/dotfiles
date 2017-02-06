@@ -21,6 +21,8 @@ Plugin 'pangloss/vim-javascript'
 
 Plugin 'w0rp/ale'
 
+Plugin 'scrooloose/nerdcommenter'
+
 Plugin 'ternjs/tern_for_vim'
 Plugin 'Valloric/YouCompleteMe'
 
