@@ -20,6 +20,10 @@ Plugin 'tpope/vim-surround'
 Plugin 'pangloss/vim-javascript'
 
 Plugin 'w0rp/ale'
+
+Plugin 'ternjs/tern_for_vim'
+Plugin 'Valloric/YouCompleteMe'
+
 filetype plugin indent on "Reenable filetype controls
 
 " === GENERAL SETTINGS ===
@@ -164,6 +168,15 @@ set laststatus=2
 "  let g:syntastic_json_checkers=['jsonlint']
 "  let g:syntastic_python_checkers=['flake8']
 "  let g:syntastic_html_checkers=['polylint']
+
+" === YOU COMPLETE ME SETTINGS ===
+let g:ycm_auto_trigger = 0
+let g:ycm_autoclose_preview_window_after_completion = 1
+
+" === ALE SETTINGS ===
+
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 0
 
 let g:ale_linters = {
 \   'javascript': ['eslint'],
