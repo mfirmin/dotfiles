@@ -1,8 +1,29 @@
-filetype plugin indent on
+set nocompatible " Not vi-compatible
+filetype off "Disable filetype controls
+
+" === PLUGINS ===
+" Enable vundle
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" vundle
+Plugin 'gmarik/vundle'
+
+Plugin 'ctrlpvim/ctrlp.vim'
+
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+
+Plugin 'pangloss/vim-javascript'
+
+Plugin 'w0rp/ale'
+filetype plugin indent on "Reenable filetype controls
 
 " === GENERAL SETTINGS ===
 
-set nocompatible " Needed for plugins
 set number "Enable line numbers
 set relativenumber " Set relative numbers on
 
@@ -68,12 +89,16 @@ command Subl !echo '%:p' | xargs subl
 
 " === MISCELLANEOUS ===
 
+" Do not insert comments (on the line after a comment) when hitting enter etc.
+autocmd BufEnter * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 " Disable beeping on ESC
 set noerrorbells visualbell t_vb=
 if has('autocmd')
     autocmd GUIEnter * set visualbell t_vb=
 endif
 
+" Set clang_library_path
 if has("unix")
     let s:uname = system("uname -s")
     "OSX ONLY"
@@ -96,10 +121,6 @@ function! <SID>StripTrailingWhitespaces()
     let @/=_s
     call cursor(l, c)
 endfunction
-
-" === ??? ===
-autocmd BufEnter * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
 
 " == PLUGIN SETTINGS ==
 
@@ -130,19 +151,26 @@ set laststatus=2
 " === SYNTASTIC SETTINGS ===
 
 " Populate location list
-let g:syntastic_always_populate_loc_list = 1
-" Do not automatically enable location list (this is SLOW)
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_loc_list_height = 5
-" Check files on open and save
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
+"  let g:syntastic_always_populate_loc_list = 1
+"  " Do not automatically enable location list (this is SLOW)
+"  let g:syntastic_auto_loc_list = 0
+"  let g:syntastic_loc_list_height = 5
+"  " Check files on open and save
+"  let g:syntastic_check_on_open = 1
+"  let g:syntastic_check_on_wq = 1
+"  
+"  " === Syntastic Linters  ===
+"  let g:syntastic_javascript_checkers = ['eslint']
+"  let g:syntastic_json_checkers=['jsonlint']
+"  let g:syntastic_python_checkers=['flake8']
+"  let g:syntastic_html_checkers=['polylint']
 
-" === Syntastic Linters  ===
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_json_checkers=['jsonlint']
-let g:syntastic_python_checkers=['flake8']
-let g:syntastic_html_checkers=['polylint']
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'json': ['jsonlint'],
+\   'python': ['flake8'],
+\   'html': ['polylint'],
+\}
 
 
 
@@ -152,9 +180,9 @@ let g:syntastic_html_checkers=['polylint']
 set statusline+=%{fugitive#statusline()}
 
 " === Add linting status from Syntastic 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
 
 " == Filetype specific settings ==
@@ -178,8 +206,3 @@ ab fitlers filters
 
 ab funciton function
 ab funcitons functions
-
-
-" === INSTALL PLUGINS ===
-call pathogen#infect()
-
