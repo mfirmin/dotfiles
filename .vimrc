@@ -18,6 +18,9 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-abolish'
+
+Plugin 'christoomey/vim-tmux-navigator'
 
 Plugin 'pangloss/vim-javascript'
 
@@ -25,8 +28,10 @@ Plugin 'w0rp/ale'
 
 Plugin 'scrooloose/nerdcommenter'
 
-Plugin 'ternjs/tern_for_vim'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'ervandew/supertab'
+
+"Plugin 'ternjs/tern_for_vim'
+"Plugin 'Valloric/YouCompleteMe'
 
 Plugin 'vimwiki/vimwiki'
 
@@ -73,10 +78,10 @@ ca Q q
 ca Qa qa
 
 " Switch panes with C-hjkl instead of C-w+hjkl
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+"nnoremap <C-h> <C-w>h
+"nnoremap <C-j> <C-w>j
+"nnoremap <C-k> <C-w>k
+"nnoremap <C-l> <C-w>l
 
 " Remap d and x commands to NOT copy on delete
 " Copy functionality can be acheived by prepending the leader
@@ -138,6 +143,8 @@ endfunction
 
 " use nearest .git directory as working directory for ctrl-p
 let g:ctrlp_working_path_mode = 'r'
+set wildignore+=_site
+set wildignore+=node_modules
 
 " Activate ctrl-p with ',p'
 nmap <leader>p :CtrlP<cr>
@@ -215,13 +222,3 @@ autocmd BufNewFile,BufRead,BufEnter *.html :syntax sync fromstart
 " === JSON ===
 " === Ensure json files are recognized as json files.
 au BufRead,BufNewFile *.json set filetype=json
-
-
-" === SPELL CHECK ===
-ab Fitler Filter
-ab fitler Filter
-ab Fitlers Filters
-ab fitlers filters
-
-ab funciton function
-ab funcitons functions
