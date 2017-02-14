@@ -198,6 +198,10 @@ let g:ale_linters = {
 \   'html': ['polylint'],
 \}
 
+" === VIM-JAVASCRIPT SETTINGS ===
+
+let g:javascript_plugin_jsdoc = 1
+
 
 
 " === STATUS LINE ===
