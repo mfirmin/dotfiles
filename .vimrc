@@ -1,41 +1,37 @@
-set nocompatible " Not vi-compatible
-filetype off "Disable filetype controls
-
 " === PLUGINS ===
-" Enable vundle
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" Enable vim-plug
+call plug#begin('~/.vim/plugged')
 
 " vundle
-Plugin 'gmarik/vundle'
+Plug 'gmarik/vundle'
 
-Plugin 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-vinegar'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-abolish'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-abolish'
 
-Plugin 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
 
-Plugin 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 
-Plugin 'w0rp/ale'
+Plug 'w0rp/ale'
 
-Plugin 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 
-Plugin 'ervandew/supertab'
+Plug 'ervandew/supertab'
 
-"Plugin 'ternjs/tern_for_vim'
-"Plugin 'Valloric/YouCompleteMe'
+"Plug 'ternjs/tern_for_vim'
+"Plug 'Valloric/YouCompleteMe'
 
-Plugin 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki'
 
-filetype plugin indent on "Reenable filetype controls
+call plug#end()
 
 " === GENERAL SETTINGS ===
 
