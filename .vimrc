@@ -1,12 +1,7 @@
 " === PLUGINS ===
 " Enable vim-plug
 call plug#begin('~/.vim/plugged')
-
-" vundle
-
 Plug 'leafgarland/typescript-vim'
-Plug 'gmarik/vundle'
-
 Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'vim-airline/vim-airline'
