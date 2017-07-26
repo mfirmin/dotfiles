@@ -3,6 +3,8 @@
 call plug#begin('~/.vim/plugged')
 
 " vundle
+
+Plug 'leafgarland/typescript-vim'
 Plug 'gmarik/vundle'
 
 Plug 'ctrlpvim/ctrlp.vim'
@@ -27,7 +29,8 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'ervandew/supertab'
 
 "Plug 'ternjs/tern_for_vim'
-"Plug 'Valloric/YouCompleteMe'
+Plug 'Quramy/tsuquyomi'
+Plug 'Valloric/YouCompleteMe'
 
 Plug 'vimwiki/vimwiki'
 
@@ -179,8 +182,13 @@ set laststatus=2
 "  let g:syntastic_html_checkers=['polylint']
 
 " === YOU COMPLETE ME SETTINGS ===
-let g:ycm_auto_trigger = 0
+" let g:ycm_auto_trigger = 0
 let g:ycm_autoclose_preview_window_after_completion = 1
+
+if !exists("g:ycm_semantic_triggers")
+  let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
 
 " === ALE SETTINGS ===
 
@@ -192,6 +200,7 @@ let g:ale_linters = {
 \   'json': ['jsonlint'],
 \   'python': ['flake8'],
 \   'html': ['polylint'],
+\   'typescript': ['tslint'],
 \}
 
 " === VIM-JAVASCRIPT SETTINGS ===
