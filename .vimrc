@@ -2,7 +2,10 @@
 " Enable vim-plug
 call plug#begin('~/.vim/plugged')
 
+Plug 'michaeljsmith/vim-indent-object'
 Plug 'ctrlpvim/ctrlp.vim'
+
+Plug 'junegunn/vim-easy-align'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -22,6 +25,8 @@ Plug 'w0rp/ale'
 Plug 'scrooloose/nerdcommenter'
 
 Plug 'ervandew/supertab'
+
+Plug 'suan/vim-instant-markdown'
 
 "Plug 'ternjs/tern_for_vim'
 "Plug 'Valloric/YouCompleteMe'
@@ -47,6 +52,8 @@ set cursorline " Add cursor line
 set lazyredraw "Does not update screen while executing macros etc
 set ttyfast "Tells vim this is a fast terminal
 set t_Co=256 "Use 256 colors
+
+set clipboard=unnamed "Hack for broken system clipboard in macOS Sierra
 
 " === SYNTAX HIGHLIGHTING ===
 syntax on
