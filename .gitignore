@@ -1,0 +1,7 @@
+.tern-project
+
+*~
+.DS_Store
+www-built
+*.swp
+*.swo
