@@ -4,7 +4,11 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'leafgarland/typescript-vim'
-Plug 'ctrlpvim/ctrlp.vim'
+
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+
+"Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'junegunn/vim-easy-align'
 
@@ -29,7 +33,7 @@ Plug 'ervandew/supertab'
 
 Plug 'suan/vim-instant-markdown'
 
-"Plug 'ternjs/tern_for_vim'
+Plug 'ternjs/tern_for_vim'
 Plug 'Quramy/tsuquyomi'
 Plug 'Valloric/YouCompleteMe'
 
@@ -57,6 +61,10 @@ set t_Co=256 "Use 256 colors
 
 set clipboard=unnamed "Hack for broken system clipboard in macOS Sierra
 
+"map ctrl-a/e to home and end in cmd line mode
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+
 " === SYNTAX HIGHLIGHTING ===
 syntax on
 " Match parens
@@ -78,6 +86,8 @@ ca W w
 ca Wq wq
 ca Q q
 ca Qa qa
+
+ab threePAnel threePanel
 
 " Switch panes with C-hjkl instead of C-w+hjkl
 "nnoremap <C-h> <C-w>h
@@ -144,19 +154,26 @@ endfunction
 " === CTRL-P SETTINGS ===
 
 " use nearest .git directory as working directory for ctrl-p
-let g:ctrlp_working_path_mode = 'r'
-set wildignore+=_site
-set wildignore+=node_modules
+"let g:ctrlp_working_path_mode = 'r'
+" set wildignore+=_site
+" set wildignore+=node_modules
 
-" Activate ctrl-p with ',p'
-nmap <leader>p :CtrlP<cr>
+" Activate fzf, and use .git as root
+fun! s:fzf_root()
+	let path = finddir(".git", expand("%:p:h").";")
+	return fnamemodify(substitute(path, ".git", "", ""), ":p:h")
+endfun
+
+nnoremap <silent> <Leader>p :exe 'Files ' . <SID>fzf_root()<CR> 
+
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 " ,bb = ctrp-p through buffers
-nmap <leader>bb :CtrlPBuffer<cr> 
-" ,bm = ctrp-p in mixed mode
-nmap <leader>bm :CtrlPMixed<cr>
-" ,bm = ctrl-p in most-recently-used mode
-nmap <leader>bs :CtrlPMRU<cr>
+" nmap <leader>bb :CtrlPBuffer<cr> 
+" " ,bm = ctrp-p in mixed mode
+" nmap <leader>bm :CtrlPMixed<cr>
+" " ,bm = ctrl-p in most-recently-used mode
+" nmap <leader>bs :CtrlPMRU<cr>
 
 " === VIM AIRLINE SETTINGS ===
 " Enable powerline fonts and symbols
