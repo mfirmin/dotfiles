@@ -8,6 +8,8 @@ Plug 'leafgarland/typescript-vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
+Plug 'bkad/CamelCaseMotion'
+
 "Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'junegunn/vim-easy-align'
@@ -59,8 +61,6 @@ set lazyredraw "Does not update screen while executing macros etc
 set ttyfast "Tells vim this is a fast terminal
 set t_Co=256 "Use 256 colors
 
-set clipboard=unnamed "Hack for broken system clipboard in macOS Sierra
-
 "map ctrl-a/e to home and end in cmd line mode
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
@@ -68,7 +68,7 @@ cnoremap <C-e> <End>
 " === SYNTAX HIGHLIGHTING ===
 syntax on
 " Match parens
-highlight MatchParen cterm=bold ctermbg=grey 
+highlight MatchParen cterm=bold ctermbg=grey
 " Make comments grey
 hi Comment ctermfg=darkgrey
 
@@ -82,7 +82,7 @@ let mapleader = ","
 nnoremap <leader>; ,
 
 " Write and quit not case sensitive
-ca W w 
+ca W w
 ca Wq wq
 ca Q q
 ca Qa qa
@@ -151,7 +151,11 @@ endfunction
 
 " == PLUGIN SETTINGS ==
 
-" === CTRL-P SETTINGS ===
+" === CamelCaseMotion Settings
+
+call camelcasemotion#CreateMotionMappings('<space>')
+
+" === fzf Settings ===
 
 " use nearest .git directory as working directory for ctrl-p
 "let g:ctrlp_working_path_mode = 'r'
@@ -164,12 +168,12 @@ fun! s:fzf_root()
 	return fnamemodify(substitute(path, ".git", "", ""), ":p:h")
 endfun
 
-nnoremap <silent> <Leader>p :exe 'Files ' . <SID>fzf_root()<CR> 
+nnoremap <silent> <Leader>p :exe 'Files ' . <SID>fzf_root()<CR>
 
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 " ,bb = ctrp-p through buffers
-" nmap <leader>bb :CtrlPBuffer<cr> 
+" nmap <leader>bb :CtrlPBuffer<cr>
 " " ,bm = ctrp-p in mixed mode
 " nmap <leader>bm :CtrlPMixed<cr>
 " " ,bm = ctrl-p in most-recently-used mode
@@ -177,7 +181,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 " === VIM AIRLINE SETTINGS ===
 " Enable powerline fonts and symbols
-let g:airline_powerline_fonts = 1 
+let g:airline_powerline_fonts = 1
 " Show all buffers when there's only one tab open
 let g:airline#extensions#tabline#enabled = 1
 " Always show statusline
@@ -194,7 +198,7 @@ set laststatus=2
 "  " Check files on open and save
 "  let g:syntastic_check_on_open = 1
 "  let g:syntastic_check_on_wq = 1
-"  
+"
 "  " === Syntastic Linters  ===
 "  let g:syntastic_javascript_checkers = ['eslint']
 "  let g:syntastic_json_checkers=['jsonlint']
@@ -234,7 +238,7 @@ let g:javascript_plugin_jsdoc = 1
 " === Add git status from fugitive
 set statusline+=%{fugitive#statusline()}
 
-" === Add linting status from Syntastic 
+" === Add linting status from Syntastic
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
 " set statusline+=%*
@@ -243,8 +247,8 @@ set statusline+=%{fugitive#statusline()}
 " == Filetype specific settings ==
 
 " === HTML ===
-" Perform .html highlighting from the beginning of the file 
-" (otherwise we get weird gaps in highlighting when there is 
+" Perform .html highlighting from the beginning of the file
+" (otherwise we get weird gaps in highlighting when there is
 " embedded javascript)
 autocmd BufNewFile,BufRead,BufEnter *.html :syntax sync fromstart
 
