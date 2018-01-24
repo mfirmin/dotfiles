@@ -7,6 +7,7 @@ Plug 'leafgarland/typescript-vim'
 
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'pbogut/fzf-mru.vim'
 
 Plug 'bkad/CamelCaseMotion'
 
@@ -176,8 +177,8 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 " nmap <leader>bb :CtrlPBuffer<cr>
 " " ,bm = ctrp-p in mixed mode
 " nmap <leader>bm :CtrlPMixed<cr>
-" " ,bm = ctrl-p in most-recently-used mode
-" nmap <leader>bs :CtrlPMRU<cr>
+" ,bm = ctrl-p in most-recently-used mode
+nmap <leader>bs :FZFMru<cr>
 
 " === VIM AIRLINE SETTINGS ===
 " Enable powerline fonts and symbols
