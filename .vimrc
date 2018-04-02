@@ -2,14 +2,11 @@
 " Enable vim-plug
 call plug#begin('~/.vim/plugged')
 
-Plug 'michaeljsmith/vim-indent-object'
 Plug 'leafgarland/typescript-vim'
 
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'pbogut/fzf-mru.vim'
-
-Plug 'junegunn/vim-easy-align'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -25,8 +22,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'pangloss/vim-javascript'
 
 Plug 'w0rp/ale'
-
-Plug 'scrooloose/nerdcommenter'
 
 Plug 'ervandew/supertab'
 
@@ -56,7 +51,7 @@ set incsearch hlsearch "highlight searches incrementally
 set cursorline " Add cursor line
 set lazyredraw "Does not update screen while executing macros etc
 set ttyfast "Tells vim this is a fast terminal
-set t_Co=256 "Use 256 colors
+" set t_Co=256 "Use 256 colors
 
 "map ctrl-a/e to home and end in cmd line mode
 cnoremap <C-a> <Home>
