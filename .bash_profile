@@ -18,7 +18,9 @@ else
         ((${#NAME}>$LENGTH)) && NAME="/..${NAME:$[${#NAME}-LENGTH+4]}";
         echo "$PRE$NAME"
     }
-    export PS1='\[\033[1;92m\]\u@alatar\[\033[0m\] \[\033[1;94m\]$(_PS1 "$PWD" 30)$\[\033[0m\] '
+
+    HOSTNAME=$(hostname -s)
+    export PS1='\[\033[1;92m\]\u@$HOSTNAME\[\033[0m\] \[\033[1;94m\]$(_PS1 "$PWD" 30)$\[\033[0m\] '
 fi
 
 export CLICOLOR=1
