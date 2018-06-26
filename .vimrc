@@ -52,6 +52,11 @@ set cursorline " Add cursor line
 set lazyredraw "Does not update screen while executing macros etc
 set ttyfast "Tells vim this is a fast terminal
 " set t_Co=256 "Use 256 colors
+set encoding=utf-8
+
+" Use 2 spaces for html
+autocmd FileType html setlocal shiftwidth=2
+autocmd FileType html setlocal tabstop=2
 
 "map ctrl-a/e to home and end in cmd line mode
 cnoremap <C-a> <Home>
@@ -206,6 +211,7 @@ let g:ycm_semantic_triggers['typescript'] = ['.']
 
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
+let g:ale_javascript_eslint_use_global = 1
 
 let g:ale_linters = {
 \   'javascript': ['eslint'],
