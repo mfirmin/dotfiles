@@ -28,12 +28,9 @@ export LSCOLORS=Exgxcxdxcxegedabagacad
 
 export TERM=xterm-256color
 
-export PYTHONPATH="/Users/mfirmin/anaconda/bin:/Users/mfirmin/python_symlinks"
-
 export PATH="$PATH:/Users/mfirmin/bin"
-export PATH="/Users/mfirmin/anaconda/bin:$PATH"
 
-source ~/Dropbox/.globals/git-completion.bash
+source ~/dotfiles/.git-completion.bash
 
 eval $(thefuck --alias)
 
