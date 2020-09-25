@@ -2,9 +2,9 @@
 " Enable vim-plug
 call plug#begin('~/.vim/plugged')
 
-Plug 'leafgarland/typescript-vim'
+"Plug 'leafgarland/typescript-vim'
 
-Plug '/usr/local/opt/fzf'
+Plug '/home/mfirmin/git/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'pbogut/fzf-mru.vim'
 
@@ -19,19 +19,23 @@ Plug 'tpope/vim-abolish'
 
 Plug 'christoomey/vim-tmux-navigator'
 
-Plug 'pangloss/vim-javascript'
+"Plug 'pangloss/vim-javascript'
 
 Plug 'w0rp/ale'
 
 Plug 'ervandew/supertab'
 
-Plug 'suan/vim-instant-markdown'
+"Plug 'suan/vim-instant-markdown'
 
-Plug 'ternjs/tern_for_vim'
-Plug 'Quramy/tsuquyomi'
+Plug 'tikhomirov/vim-glsl'
+
+"Plug 'ternjs/tern_for_vim'
+"Plug 'Quramy/tsuquyomi'
 Plug 'Valloric/YouCompleteMe'
 
-Plug 'vimwiki/vimwiki'
+Plug 'stefandtw/quickfix-reflector.vim'
+
+"Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
@@ -54,6 +58,13 @@ set ttyfast "Tells vim this is a fast terminal
 " set t_Co=256 "Use 256 colors
 set encoding=utf-8
 
+" ttimeoutlen used for key code delays
+set ttimeoutlen=0
+" ttimeoutlen used for mapping delays (eg leader)
+set timeoutlen=1000
+
+set tags=tags;/
+
 " Use 2 spaces for html
 autocmd FileType html setlocal shiftwidth=2
 autocmd FileType html setlocal tabstop=2
@@ -68,6 +79,8 @@ syntax on
 highlight MatchParen cterm=bold ctermbg=grey
 " Make comments grey
 hi Comment ctermfg=darkgrey
+
+hi Search cterm=NONE ctermfg=white ctermbg=blue
 
 
 " === CUSTOM COMMANDS AND KEYBINDINGS
@@ -199,19 +212,25 @@ set laststatus=2
 "  let g:syntastic_html_checkers=['polylint']
 
 " === YOU COMPLETE ME SETTINGS ===
-" let g:ycm_auto_trigger = 0
+"let g:ycm_auto_trigger = 0
+let g:ycm_min_num_of_chars_for_completion = 99
 let g:ycm_autoclose_preview_window_after_completion = 1
+"let g:ycm_key_invoke_completion = '<Tab>'
 
-if !exists("g:ycm_semantic_triggers")
-  let g:ycm_semantic_triggers = {}
-endif
-let g:ycm_semantic_triggers['typescript'] = ['.']
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+
+"if !exists("g:ycm_semantic_triggers")
+"  let g:ycm_semantic_triggers = {}
+"endif
+"let g:ycm_semantic_triggers['typescript'] = ['.']
+"let g:ycm_semantic_triggers['cpp'] = ['.']
 
 " === ALE SETTINGS ===
 
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
-let g:ale_javascript_eslint_use_global = 1
+" let g:ale_javascript_eslint_use_global = 1
 
 let g:ale_linters = {
 \   'javascript': ['eslint'],
@@ -219,7 +238,15 @@ let g:ale_linters = {
 \   'python': ['flake8'],
 \   'html': ['polylint'],
 \   'typescript': ['tslint'],
+\   'csharp': ['OmniSharp'],
+\   'cpp': ['clangtidy'],
 \}
+
+let g:ale_cpp_clangtidy_checks = ['-*', 'cppcoreguidelines-*']
+
+let g:ale_cs_mcsc_assemblies = [
+\'/home/mfirmin/Unity-2017.4.9f1/Editor/Data/Managed/UnityEngine.dll',
+\]
 
 " === VIM-JAVASCRIPT SETTINGS ===
 
@@ -249,3 +276,8 @@ autocmd BufNewFile,BufRead,BufEnter *.html :syntax sync fromstart
 " === JSON ===
 " === Ensure json files are recognized as json files.
 au BufRead,BufNewFile *.json set filetype=json
+
+au BufRead,BufNewFile *.shader set filetype=shader
+au! Syntax shader source ~/.vim/syntax/unity_shader.vim
+
+let g:ycm_extra_conf_globlist = ['/home/mfirmin/dev/erda/*']
