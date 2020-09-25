@@ -21,7 +21,7 @@ Plug 'christoomey/vim-tmux-navigator'
 
 "Plug 'pangloss/vim-javascript'
 
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 Plug 'ervandew/supertab'
 
@@ -216,9 +216,14 @@ set laststatus=2
 let g:ycm_min_num_of_chars_for_completion = 99
 let g:ycm_autoclose_preview_window_after_completion = 1
 "let g:ycm_key_invoke_completion = '<Tab>'
+let g:ycm_auto_hover = ''
 
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+
+"let g:ycm_show_diagnostics_ui = 0
+let g:ycm_echo_current_diagnostic = 0
+let g:ycm_enable_diagnostic_highlighting = 0
 
 "if !exists("g:ycm_semantic_triggers")
 "  let g:ycm_semantic_triggers = {}
