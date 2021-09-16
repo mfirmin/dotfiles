@@ -35,7 +35,7 @@ Plug 'Valloric/YouCompleteMe'
 
 Plug 'stefandtw/quickfix-reflector.vim'
 
-"Plug 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
@@ -96,8 +96,6 @@ ca W w
 ca Wq wq
 ca Q q
 ca Qa qa
-
-ab threePAnel threePanel
 
 " Switch panes with C-hjkl instead of C-w+hjkl
 "nnoremap <C-h> <C-w>h
@@ -221,7 +219,7 @@ let g:ycm_auto_hover = ''
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
-"let g:ycm_show_diagnostics_ui = 0
+let g:ycm_show_diagnostics_ui = 0
 let g:ycm_echo_current_diagnostic = 0
 let g:ycm_enable_diagnostic_highlighting = 0
 
@@ -248,6 +246,7 @@ let g:ale_linters = {
 \}
 
 let g:ale_cpp_clangtidy_checks = ['-*', 'cppcoreguidelines-*']
+let g:ale_cpp_clangtidy_extra_options = '-extra-arg=-std=c++17'
 
 let g:ale_cs_mcsc_assemblies = [
 \'/home/mfirmin/Unity-2017.4.9f1/Editor/Data/Managed/UnityEngine.dll',
