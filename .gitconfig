@@ -1,0 +1,13 @@
+[push]
+	default = simple
+[user]
+	name = Michael Firmin
+	email = mcfirmin@gmail.com
+[core]
+	editor = vim
+	excludesfile = /home/mfirmin/.gitignore
+	pager = less -+F
+[alias]
+    fe = fetch origin --prune
+[pager]
+	branch = false
