@@ -4,7 +4,7 @@ call plug#begin('~/.vim/plugged')
 
 "Plug 'leafgarland/typescript-vim'
 
-Plug '/home/mfirmin/git/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'pbogut/fzf-mru.vim'
 
