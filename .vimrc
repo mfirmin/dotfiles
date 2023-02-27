@@ -8,6 +8,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'pbogut/fzf-mru.vim'
 
+Plug 'rhysd/vim-clang-format'
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -47,7 +49,7 @@ set relativenumber " Set relative numbers on
 set autoindent " Auto indent files
 set smartindent " Use smart indent to indent
 
-set tabstop=4 " tab == 4 spaces
+set tabstop=8 " tab == 4 spaces
 set shiftwidth=4 " >>,<< move by 4 characters
 set expandtab "expand tab into spaces
 set undofile "use undo files
@@ -62,6 +64,16 @@ set encoding=utf-8
 set ttimeoutlen=0
 " ttimeoutlen used for mapping delays (eg leader)
 set timeoutlen=1000
+
+" highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
+" set colorcolumn=80
+
+highlight OverLength ctermbg=red guibg=red
+match OverLength /\%>80v.\+/
+
+" Highlight trailing whitespace
+highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 
 set tags=tags;/
 
@@ -124,6 +136,12 @@ command Subl !echo '%:p' | xargs subl
 
 " === MISCELLANEOUS ===
 
+" C and h files are cpp files
+augroup cpp_detect
+    au BufNewFile,BufRead *.C setlocal filetype=cpp
+    au BufNewFile,BufRead *.h setlocal filetype=cpp
+augroup end
+
 " Do not insert comments (on the line after a comment) when hitting enter etc.
 autocmd BufEnter * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
@@ -143,19 +161,19 @@ if has("unix")
 endif
 
 " Strip trailing whitespace for the given filetypes
-autocmd FileType c,cpp,java,html,javascript,python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
-
-" strips trailing whitespace at the end of files. this
-" is called on buffer write in the autogroup above.
-function! <SID>StripTrailingWhitespaces()
-    " save last search & cursor position
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    let @/=_s
-    call cursor(l, c)
-endfunction
+" autocmd FileType c,cpp,java,html,javascript,python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+" 
+" " strips trailing whitespace at the end of files. this
+" " is called on buffer write in the autogroup above.
+" function! <SID>StripTrailingWhitespaces()
+"     " save last search & cursor position
+"     let _s=@/
+"     let l = line(".")
+"     let c = col(".")
+"     %s/\s\+$//e
+"     let @/=_s
+"     call cursor(l, c)
+" endfunction
 
 " == PLUGIN SETTINGS ==
 
@@ -210,10 +228,8 @@ set laststatus=2
 "  let g:syntastic_html_checkers=['polylint']
 
 " === YOU COMPLETE ME SETTINGS ===
-"let g:ycm_auto_trigger = 0
 let g:ycm_min_num_of_chars_for_completion = 99
 let g:ycm_autoclose_preview_window_after_completion = 1
-"let g:ycm_key_invoke_completion = '<Tab>'
 let g:ycm_auto_hover = ''
 
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -223,11 +239,18 @@ let g:ycm_show_diagnostics_ui = 0
 let g:ycm_echo_current_diagnostic = 0
 let g:ycm_enable_diagnostic_highlighting = 0
 
-"if !exists("g:ycm_semantic_triggers")
-"  let g:ycm_semantic_triggers = {}
-"endif
-"let g:ycm_semantic_triggers['typescript'] = ['.']
-"let g:ycm_semantic_triggers['cpp'] = ['.']
+if !exists("g:ycm_semantic_triggers")
+  let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
+let g:ycm_semantic_triggers['cpp'] = ['.']
+
+nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" let g:ycm_python_sys_path = ['/home/michaelf/dev/hfs/houdini/python3.7libs/']
+let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/python/ycm/.ycm_extra_conf.py'
 
 " === ALE SETTINGS ===
 
@@ -238,24 +261,28 @@ let g:ale_lint_on_text_changed = 0
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'json': ['jsonlint'],
-\   'python': ['flake8'],
+\   'python': ['flake8', 'pylint'],
 \   'html': ['polylint'],
 \   'typescript': ['tslint'],
 \   'csharp': ['OmniSharp'],
 \   'cpp': ['clangtidy'],
 \}
 
-let g:ale_cpp_clangtidy_checks = ['-*', 'cppcoreguidelines-*']
-let g:ale_cpp_clangtidy_extra_options = '-extra-arg=-std=c++17'
+" let g:ale_cpp_clangtidy_checks = ['-*', 'cppcoreguidelines-*']
+let g:ale_cpp_clangtidy_extra_options = '-extra-arg=-std=c++17 -config-file=~/dev/src/.clang-tidy'
 
 let g:ale_cs_mcsc_assemblies = [
 \'/home/mfirmin/Unity-2017.4.9f1/Editor/Data/Managed/UnityEngine.dll',
 \]
 
+" === CPP SETTINGS ===
+
+let g:clang_format#detect_style_file = 1
+au Filetype c,cpp vmap = :ClangFormat<CR>
+
 " === VIM-JAVASCRIPT SETTINGS ===
 
 let g:javascript_plugin_jsdoc = 1
-
 
 
 " === STATUS LINE ===
