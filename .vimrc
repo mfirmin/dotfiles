@@ -65,15 +65,15 @@ set ttimeoutlen=0
 " ttimeoutlen used for mapping delays (eg leader)
 set timeoutlen=1000
 
-" highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
-" set colorcolumn=80
+highlight ColorColumn ctermbg=lightred guibg=lightred
+set colorcolumn=81
 
-highlight OverLength ctermbg=red guibg=red
-match OverLength /\%>80v.\+/
+" highlight OverLength ctermbg=red guibg=red
+" autocmd VimEnter,WinEnter * match OverLength /\%>80v.\+/
 
 " Highlight trailing whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd VimEnter,WinEnter * match ExtraWhitespace /\s\+$/
 
 set tags=tags;/
 
