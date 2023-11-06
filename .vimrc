@@ -266,6 +266,7 @@ let g:ale_linters = {
 \   'typescript': ['tslint'],
 \   'csharp': ['OmniSharp'],
 \   'cpp': ['clangtidy'],
+\   'go': ['gopls'],
 \}
 
 " let g:ale_cpp_clangtidy_checks = ['-*', 'cppcoreguidelines-*']
